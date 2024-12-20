@@ -56,7 +56,15 @@ type ReqRegister struct {
 	// Type for registration, only used for appservice user registrations
 	// https://spec.matrix.org/v1.2/application-service-api/#server-admin-style-permissions
 	Type AuthType `json:"type,omitempty"`
+
+	UserType *UserType `json:"user_type,omitempty"`
 }
+
+type UserType string
+
+const (
+	UserTypeBot UserType = "bot"
+)
 
 type BaseAuthData struct {
 	Type    AuthType `json:"type"`

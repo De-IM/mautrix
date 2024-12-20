@@ -59,6 +59,17 @@ func (intent *IntentAPI) Register(ctx context.Context) error {
 	return err
 }
 
+func (intent *IntentAPI) RegisterBot(ctx context.Context) error {
+	userType := mautrix.UserTypeBot
+	_, err := intent.Client.MakeRequest(ctx, http.MethodPost, intent.BuildClientURL("v3", "register"), &mautrix.ReqRegister{
+		Username:     intent.Localpart,
+		Type:         mautrix.AuthTypeAppservice,
+		InhibitLogin: true,
+		UserType:     &userType,
+	}, nil)
+	return err
+}
+
 func (intent *IntentAPI) EnsureRegistered(ctx context.Context) error {
 	if intent.IsCustomPuppet {
 		return nil
