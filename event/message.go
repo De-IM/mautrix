@@ -50,6 +50,7 @@ const (
 	MsgVideo    MessageType = "m.video"
 	MsgAudio    MessageType = "m.audio"
 	MsgFile     MessageType = "m.file"
+	MsgCommand  MessageType = "m.command"
 
 	MsgVerificationRequest MessageType = "m.key.verification.request"
 
