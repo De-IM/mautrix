@@ -143,6 +143,12 @@ type Button struct {
 	//
 	// optional
 	CallbackData *string `json:"callback_data,omitempty"`
+	// WebApp if specified, the described Web App will be launched when the button
+	// is pressed. The Web App will be able to send a “web_app_data” service
+	// message. Available in private chats only.
+	//
+	// optional
+	WebApp *WebAppInfo `json:"web_app,omitempty"`
 	// SwitchInlineQuery if set, pressing the button will prompt the user to select one of their chats,
 	// open that chat and insert the bot's username and the specified inline query in the input field.
 	// Can be empty, in which case just the bot's username will be inserted.
@@ -179,6 +185,12 @@ type Button struct {
 
 	// NOTE: Only button with LinkButton style can have link. Also, URL is mutually exclusive with CustomID.
 	URL string `json:"url,omitempty"`
+}
+
+type WebAppInfo struct {
+	// URL is the HTTPS URL of a Web App to be opened with additional data as
+	// specified in Initializing Web Apps.
+	URL string `json:"url"`
 }
 
 // CallbackGame is for starting a game in an inline keyboard button.
