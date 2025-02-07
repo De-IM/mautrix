@@ -143,8 +143,8 @@ type MessageEventContent struct {
 	MSC1767Audio *MSC1767Audio `json:"org.matrix.msc1767.audio,omitempty"`
 	MSC3245Voice *MSC3245Voice `json:"org.matrix.msc3245.voice,omitempty"`
 
-	Components []MessageComponent `json:"components"`
-	BotCommand BotCommand         `json:"bot_command"`
+	Components [][]MessageComponent `json:"components"`
+	BotCommand BotCommand           `json:"bot_command"`
 	// The flags of the message, which describe extra features of a message.
 	// This is a combination of bit masks; the presence of a certain permission can
 	// be checked by performing a bitwise AND between this int and the flag.
