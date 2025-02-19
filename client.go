@@ -1059,6 +1059,18 @@ func (cli *Client) SetAccountData(ctx context.Context, name string, data interfa
 	return nil
 }
 
+func (cli *Client) GetAccountDataByAdmin(ctx context.Context, userId id.UserID, name string, output interface{}) (err error) {
+	urlPath := cli.BuildClientURL("v3", "user", userId, "account_data", name)
+	_, err = cli.MakeRequest(ctx, http.MethodGet, urlPath, nil, output)
+	return
+}
+
+func (cli *Client) SetAccountDataByAdmin(ctx context.Context, userId id.UserID, name string, data interface{}) (err error) {
+	urlPath := cli.BuildClientURL("v3", "user", userId, "account_data", name)
+	_, err = cli.MakeRequest(ctx, http.MethodPut, urlPath, data, nil)
+	return nil
+}
+
 // GetRoomAccountData gets the user's account data of this type in a specific room. See https://spec.matrix.org/v1.2/client-server-api/#put_matrixclientv3useruseridaccount_datatype
 func (cli *Client) GetRoomAccountData(ctx context.Context, roomID id.RoomID, name string, output interface{}) (err error) {
 	urlPath := cli.BuildClientURL("v3", "user", cli.UserID, "rooms", roomID, "account_data", name)
