@@ -51,6 +51,7 @@ const (
 	MsgAudio    MessageType = "m.audio"
 	MsgFile     MessageType = "m.file"
 	MsgCommand  MessageType = "m.command"
+	MsgCard     MessageType = "m.card"
 
 	MsgVerificationRequest MessageType = "m.key.verification.request"
 
@@ -144,8 +145,8 @@ type MessageEventContent struct {
 	MSC3245Voice *MSC3245Voice `json:"org.matrix.msc3245.voice,omitempty"`
 
 	Components [][]MessageComponent `json:"components"`
-	BotCommand BotCommand           `json:"bot_command"`
-	CardsV2    []CardV2             `json:"cardsV2"`
+	BotCommand *BotCommand          `json:"bot_command,omitempty"`
+	MsgCardV2  *MsgCardV2           `json:"cards,omitempty"`
 	// The flags of the message, which describe extra features of a message.
 	// This is a combination of bit masks; the presence of a certain permission can
 	// be checked by performing a bitwise AND between this int and the flag.
