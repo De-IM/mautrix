@@ -66,3 +66,18 @@ type CardV2 struct {
 	CardId string `json:"card_id"`
 	Card   Card   `json:"card"`
 }
+
+const (
+	CardTypeApp     = "APP"
+	CardTypeTrading = "TRADING"
+)
+
+const (
+	CardHeaderTypeDefault = "DEFAULT"
+	CardHeaderTypeCard    = "CARD"
+)
+
+const (
+	CardSectionTypeTable   = "TABLE"
+	CardSectionTypeDEFAULT = "DEFAULT"
+)
