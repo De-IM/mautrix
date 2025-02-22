@@ -145,6 +145,7 @@ type MessageEventContent struct {
 
 	Components [][]MessageComponent `json:"components"`
 	BotCommand BotCommand           `json:"bot_command"`
+	CardsV2    []CardV2             `json:"cardsV2"`
 	// The flags of the message, which describe extra features of a message.
 	// This is a combination of bit masks; the presence of a certain permission can
 	// be checked by performing a bitwise AND between this int and the flag.
