@@ -1,81 +1,95 @@
 package event
 
 type CardHeader struct {
-	Type         string `json:"type"`
-	Title        string `json:"title"`
-	Subtitle     string `json:"subtitle"`
-	ImageUrl     string `json:"image_url"`
-	ImageType    string `json:"image_type"`
-	ImageAltText string `json:"image_alt_text"`
+	Type         string `json:"type,omitempty"`
+	Title        string `json:"title,omitempty"`
+	Subtitle     string `json:"subtitle,omitempty"`
+	ImageUrl     string `json:"imageUrl,omitempty"`
+	ImageType    string `json:"imageType,omitempty"`
+	ImageAltText string `json:"imageAltText,omitempty"`
 }
 
 type DecoratedText struct {
-	StartIcon CardIcon `json:"start_icon"`
-	Text      string   `json:"text"`
+	StartIcon *CardIcon `json:"startIcon,omitempty"`
+	Text      string    `json:"text,omitempty"`
+	Texts     []string  `json:"texts,omitempty"`
+}
+
+type CardTitle struct {
+	Title     string    `json:"title,omitempty"`
+	StartIcon *CardIcon `json:"startIcon,omitempty"`
+	EndIcon   *CardIcon `json:"endIcon,omitempty"`
 }
 
 type CardIcon struct {
-	KnownIcon string `json:"known_icon"`
+	KnownIcon string `json:"knownIcon,omitempty"`
+	Url       string `json:"url,omitempty"`
 }
 
 type CardButton struct {
-	Text    string  `json:"text"`
-	OnClick OnClick `json:"on_click"`
+	Text    string   `json:"text,omitempty"`
+	OnClick *OnClick `json:"onClick,omitempty"`
 }
 
 type OnClick struct {
-	OpenLink *OpenLink `json:"open_link,omitempty"`
+	OpenLink *OpenLink `json:"openLink,omitempty"`
 	Action   *Action   `json:"action,omitempty"`
 }
 
 type OpenLink struct {
-	URL string `json:"url"`
+	URL string `json:"url,omitempty"`
 }
 
 type Action struct {
-	Function   string      `json:"function"`
-	Parameters []Parameter `json:"parameters"`
+	Function   string       `json:"function,omitempty"`
+	Parameters []*Parameter `json:"parameters,omitempty"`
 }
 
 type Parameter struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
+	Key   string `json:"key,omitempty"`
+	Value string `json:"value,omitempty"`
 }
 
 type ButtonList struct {
-	Buttons []CardButton `json:"buttons"`
+	Buttons []*CardButton `json:"buttons,omitempty"`
 }
 
 type Widget struct {
-	DecoratedText *DecoratedText `json:"decorated_text,omitempty"`
-	ButtonList    *ButtonList    `json:"button_list,omitempty"`
+	DecoratedText *DecoratedText `json:"decoratedText,omitempty"`
+	ButtonList    *ButtonList    `json:"buttonList,omitempty"`
 }
 
 type Section struct {
-	Header                    string   `json:"header"`
-	Collapsible               bool     `json:"collapsible"`
-	UncollapsibleWidgetsCount int      `json:"uncollapsible_widgets_count"`
-	Widgets                   []Widget `json:"widgets"`
+	Header                    string    `json:"header,omitempty"`
+	Collapsible               bool      `json:"collapsible,omitempty"`
+	UncollapsibleWidgetsCount int       `json:"uncollapsibleWidgetsCount,omitempty"`
+	Widgets                   []*Widget `json:"widgets,omitempty"`
+	Type                      string    `json:"type,omitempty"`
+	Footer                    string    `json:"footer,omitempty"`
 }
 
 type Card struct {
-	Header    CardHeader `json:"header"`
-	Sections  []Section  `json:"sections"`
-	Type      string     `json:"type"`
-	Body      CardBody   `json:"body"`
-	OnClick   OnClick    `json:"on_click"`
-	TitleIcon CardIcon   `json:"title_icon"`
-	Footer    CardIcon   `json:"footer"`
+	Header   *CardHeader `json:"header,omitempty"`
+	Sections []*Section  `json:"sections,omitempty"`
+	Type     string      `json:"type,omitempty"`
+	Body     *CardBody   `json:"body,omitempty"`
+	OnClick  *OnClick    `json:"onClick,omitempty"`
+	Title    *CardTitle  `json:"title,omitempty"`
+	Footer   *CardIcon   `json:"footer,omitempty"`
 }
 
 type CardBody struct {
-	Description string `json:"description"`
-	BigImageUrl string `json:"big_image_url"`
+	Description string `json:"description,omitempty"`
+	BigImageUrl string `json:"bigImageUrl,omitempty"`
 }
 
 type CardV2 struct {
-	CardId string `json:"card_id"`
-	Card   Card   `json:"card"`
+	CardId string `json:"cardId,omitempty"`
+	Card   *Card  `json:"card,omitempty"`
+}
+
+type MsgCardV2 struct {
+	CardsV2 []*CardV2 `json:"cardsV2,omitempty"`
 }
 
 const (
