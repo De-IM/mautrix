@@ -1,6 +1,7 @@
 package event
 
 type CardHeader struct {
+	Type         string `json:"type"`
 	Title        string `json:"title"`
 	Subtitle     string `json:"subtitle"`
 	ImageUrl     string `json:"image_url"`
@@ -9,11 +10,11 @@ type CardHeader struct {
 }
 
 type DecoratedText struct {
-	StartIcon Icon   `json:"start_icon"`
-	Text      string `json:"text"`
+	StartIcon CardIcon `json:"start_icon"`
+	Text      string   `json:"text"`
 }
 
-type Icon struct {
+type CardIcon struct {
 	KnownIcon string `json:"known_icon"`
 }
 
@@ -58,8 +59,18 @@ type Section struct {
 }
 
 type Card struct {
-	Header   CardHeader `json:"header"`
-	Sections []Section  `json:"sections"`
+	Header    CardHeader `json:"header"`
+	Sections  []Section  `json:"sections"`
+	Type      string     `json:"type"`
+	Body      CardBody   `json:"body"`
+	OnClick   OnClick    `json:"on_click"`
+	TitleIcon CardIcon   `json:"title_icon"`
+	Footer    CardIcon   `json:"footer"`
+}
+
+type CardBody struct {
+	Description string `json:"description"`
+	BigImageUrl string `json:"big_image_url"`
 }
 
 type CardV2 struct {
