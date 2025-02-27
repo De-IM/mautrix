@@ -133,7 +133,7 @@ type ComponentEmoji struct {
 // Button represents button component.
 type Button struct {
 	// Text label text on the button
-	Text string `json:"text"`
+	Text string `json:"text,omitempty"`
 	// LoginURL is an HTTP URL used to automatically authorize the user. Can be
 	// used as a replacement for the Telegram Login Widget
 	//
@@ -180,7 +180,7 @@ type Button struct {
 	//
 	// optional
 	Pay   bool            `json:"pay,omitempty"`
-	Style ButtonStyle     `json:"style"`
+	Style ButtonStyle     `json:"style,omitempty"`
 	Emoji *ComponentEmoji `json:"emoji,omitempty"`
 
 	// NOTE: Only button with LinkButton style can have link. Also, URL is mutually exclusive with CustomID.

@@ -144,7 +144,7 @@ type MessageEventContent struct {
 	MSC1767Audio *MSC1767Audio `json:"org.matrix.msc1767.audio,omitempty"`
 	MSC3245Voice *MSC3245Voice `json:"org.matrix.msc3245.voice,omitempty"`
 
-	Components [][]MessageComponent `json:"components"`
+	Components [][]MessageComponent `json:"components,omitempty"`
 	BotCommand *BotCommand          `json:"bot_command,omitempty"`
 	MsgCardV2  *MsgCardV2           `json:"cards,omitempty"`
 	// The flags of the message, which describe extra features of a message.
