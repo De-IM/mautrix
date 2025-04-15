@@ -222,6 +222,11 @@ func (intent *IntentAPI) SendMessageEvent(ctx context.Context, roomID id.RoomID,
 	return intent.Client.SendMessageEvent(ctx, roomID, eventType, contentJSON)
 }
 
+func (intent *IntentAPI) SendMessageEventByUserId(ctx context.Context, userID id.UserID, eventType event.Type, contentJSON interface{}) (*mautrix.RespSendEvent, error) {
+	contentJSON = intent.AddDoublePuppetValue(contentJSON)
+	return intent.Client.SendMessageEventByUserId(ctx, userID, eventType, contentJSON)
+}
+
 func (intent *IntentAPI) SendMassagedMessageEvent(ctx context.Context, roomID id.RoomID, eventType event.Type, contentJSON interface{}, ts int64) (*mautrix.RespSendEvent, error) {
 	if err := intent.EnsureJoined(ctx, roomID); err != nil {
 		return nil, err

@@ -490,6 +490,7 @@ func (cli *Client) MakeFullRequestWithResp(ctx context.Context, params FullReque
 	}
 	req.Header.Set("User-Agent", cli.UserAgent)
 	if len(cli.AccessToken) > 0 {
+		fmt.Println("cli.AccessToken:", cli.AccessToken)
 		req.Header.Set("Authorization", "Bearer "+cli.AccessToken)
 	}
 	if params.Client == nil {
@@ -1139,6 +1140,34 @@ func (cli *Client) SendMessageEvent(ctx context.Context, roomID id.RoomID, event
 
 	urlData := ClientURLPath{"v3", "rooms", roomID, "send", eventType.String(), txnID}
 	urlPath := cli.BuildURLWithQuery(urlData, queryParams)
+	_, err = cli.MakeRequest(ctx, http.MethodPut, urlPath, contentJSON, &resp)
+	return
+}
+
+func (cli *Client) SendMessageEventByUserId(ctx context.Context, userID id.UserID, eventType event.Type, contentJSON interface{}, extra ...ReqSendEvent) (resp *RespSendEvent, err error) {
+	var req ReqSendEvent
+	if len(extra) > 0 {
+		req = extra[0]
+	}
+
+	var txnID string
+	if len(req.TransactionID) > 0 {
+		txnID = req.TransactionID
+	} else {
+		txnID = cli.TxnID()
+	}
+
+	queryParams := map[string]string{}
+	if req.Timestamp > 0 {
+		queryParams["ts"] = strconv.FormatInt(req.Timestamp, 10)
+	}
+	if req.MeowEventID != "" {
+		queryParams["fi.mau.event_id"] = req.MeowEventID.String()
+	}
+
+	urlData := ClientURLPath{"v3", "notice", userID, "send", eventType.String(), txnID}
+	urlPath := cli.BuildURLWithQuery(urlData, queryParams)
+	fmt.Println("urlPath:", urlPath)
 	_, err = cli.MakeRequest(ctx, http.MethodPut, urlPath, contentJSON, &resp)
 	return
 }
