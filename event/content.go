@@ -22,6 +22,7 @@ var TypeMap = map[Type]reflect.Type{
 	StateCanonicalAlias:    reflect.TypeOf(CanonicalAliasEventContent{}),
 	StateRoomName:          reflect.TypeOf(RoomNameEventContent{}),
 	StateRoomAvatar:        reflect.TypeOf(RoomAvatarEventContent{}),
+	StateRoomConfig:        reflect.TypeOf(ConfigEvent{}),
 	StateServerACL:         reflect.TypeOf(ServerACLEventContent{}),
 	StateTopic:             reflect.TypeOf(TopicEventContent{}),
 	StateTombstone:         reflect.TypeOf(TombstoneEventContent{}),

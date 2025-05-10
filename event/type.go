@@ -179,6 +179,7 @@ var (
 	StatePowerLevels       = Type{"m.room.power_levels", StateEventType}
 	StateRoomName          = Type{"m.room.name", StateEventType}
 	StateTopic             = Type{"m.room.topic", StateEventType}
+	StateRoomConfig        = Type{"m.room.config", StateEventType}
 	StateRoomAvatar        = Type{"m.room.avatar", StateEventType}
 	StatePinnedEvents      = Type{"m.room.pinned_events", StateEventType}
 	StateServerACL         = Type{"m.room.server_acl", StateEventType}
