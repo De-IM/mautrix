@@ -10,6 +10,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -122,6 +123,7 @@ func (as *AppService) PutTransaction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	log := as.Log.With().Str("transaction_id", txnID).Logger()
+	log.Debug().Msg(fmt.Sprintf("txnID:%v, body:%s", txnID, string(body)))
 	// Don't use request context, handling shouldn't be stopped even if the request times out
 	ctx := context.Background()
 	ctx = log.WithContext(ctx)
